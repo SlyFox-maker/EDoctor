@@ -24,5 +24,28 @@ namespace EDoctor
         {
             InitializeComponent();
         }
+
+        private void tagEntrar_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanelEntrar.Visibility = Visibility.Visible;
+            StackPanelRegistrarse.Visibility= Visibility.Collapsed;
+
+            windowAuthorization.Height = 300;
+
+            tagEntrar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#c9bbaa"));
+            tagRegistrarse.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffffff"));
+        }
+
+        private void tagRegistrarse_Click(object sender, RoutedEventArgs e)
+        {
+            StackPanelEntrar.Visibility = Visibility.Collapsed;
+            StackPanelRegistrarse.Visibility = Visibility.Visible;
+
+            windowAuthorization.Height = 470;
+
+            tagRegistrarse.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#c9bbaa"));
+            tagEntrar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffffff"));
+
+        }
     }
 }
