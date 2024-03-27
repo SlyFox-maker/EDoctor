@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EDoctor"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Authorization" Height="300" Width="400"
+        Title="Authorization" Height="470" Width="400"
         ResizeMode="NoResize"
         x:Name="windowAuthorization">
 
@@ -26,13 +26,13 @@
                     <Button x:Name="tagRegistrarse" HorizontalAlignment="Right" Content="Registrarse" Background="#ffffff" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagRegistrarse_Click"/>
                 </Grid>
 
-                <StackPanel x:Name="StackPanelEntrar" Visibility="Visible">
+                <StackPanel x:Name="StackPanelEntrar" Visibility="Collapsed">
                     <TextBox materialDesign:HintAssist.Hint="Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
                     <PasswordBox materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
                     <Button Content="Entrar" Margin="0 20" Background="#ffff" Foreground="Black"></Button>
                 </StackPanel>
 
-                <StackPanel x:Name="StackPanelRegistrarse" Visibility="Collapsed">
+                <StackPanel x:Name="StackPanelRegistrarse" Visibility="Visible">
                     <TextBox x:Name="textBoxFullName" materialDesign:HintAssist.Hint="Nombre completo" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
                     <TextBox x:Name="textBoxCURP" materialDesign:HintAssist.Hint="CURP" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
                     
@@ -42,7 +42,7 @@
                     <PasswordBox x:Name="passwordBoxPassword" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
                     <PasswordBox x:Name="passwordBoxPasswordConfirm" materialDesign:HintAssist.Hint="Confirmación de contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
 
-                    <Button Content="Registrarse" Margin="0 20" Background="#ffff" Foreground="Black"></Button>
+                    <Button x:Name="RegistrationButton" Content="Registrarse" Margin="0 20" Background="#ffff" Foreground="Black" Click="RegistrationButton_Click"/>
 
                 </StackPanel>
             </StackPanel>

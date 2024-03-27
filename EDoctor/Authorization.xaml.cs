@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EDoctor.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,12 @@ namespace EDoctor
     ///https://colorscheme.ru/#0041Tw0w0w0w0
     public partial class Authorization : Window
     {
+        private ControllerDoctorDataBase controllerDDataBase;
         public Authorization()
         {
             InitializeComponent();
+
+            controllerDDataBase = new ControllerDoctorDataBase();
         }
 
         private void tagEntrar_Click(object sender, RoutedEventArgs e)
@@ -46,6 +50,24 @@ namespace EDoctor
             tagRegistrarse.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#c9bbaa"));
             tagEntrar.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffffff"));
 
+        }
+
+        private void RegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            String email = textBoxEmail.Text;
+            String phone = textBoxPhone.Text;
+            String password = passwordBoxPassword.Password.ToString();
+            String passwordConfirm = passwordBoxPasswordConfirm.Password.ToString();
+            String fullName = textBoxFullName.Text;
+            String CURP = textBoxCURP.Text;
+
+            if (password != passwordConfirm)
+            {
+                MessageBox.Show("Sus contraseñas no concuerdan");
+                return;
+            }
+
+            controllerDDataBase.createNewUser(fullName, CURP,phone,email,password);
         }
     }
 }
