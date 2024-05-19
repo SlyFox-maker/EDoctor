@@ -67,7 +67,30 @@ namespace EDoctor
                 return;
             }
 
-            controllerDDataBase.createNewUser(fullName, CURP,phone,email,password);
+            if (controllerDDataBase.createNewUser(fullName, CURP, phone, email, password))
+            {
+                MainWindow MW = new MainWindow(email);
+                MW.Show();
+
+                this.Close();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            String login = lLogin.Text;
+            String password = lPassword.Password.ToString();
+
+            if(controllerDDataBase.login(login, password)) {
+                MainWindow MW = new MainWindow(login);
+                MW.Show();
+
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("La autorización no ha sido autorizada.");
+            }
         }
     }
 }

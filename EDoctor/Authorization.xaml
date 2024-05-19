@@ -26,13 +26,13 @@
                     <Button x:Name="tagRegistrarse" HorizontalAlignment="Right" Content="Registrarse" Background="#ffffff" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagRegistrarse_Click"/>
                 </Grid>
 
-                <StackPanel x:Name="StackPanelEntrar" Visibility="Collapsed">
-                    <TextBox materialDesign:HintAssist.Hint="Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-                    <PasswordBox materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
-                    <Button Content="Entrar" Margin="0 20" Background="#ffff" Foreground="Black"></Button>
+                <StackPanel x:Name="StackPanelEntrar" Visibility="Visible">
+                    <TextBox x:Name="lLogin" materialDesign:HintAssist.Hint="Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                    <PasswordBox x:Name="lPassword" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
+                    <Button Content="Entrar" Margin="0 20" Background="#ffff" Foreground="Black" Click="Button_Click"></Button>
                 </StackPanel>
 
-                <StackPanel x:Name="StackPanelRegistrarse" Visibility="Visible">
+                <StackPanel x:Name="StackPanelRegistrarse" Visibility="Collapsed">
                     <TextBox x:Name="textBoxFullName" materialDesign:HintAssist.Hint="Nombre completo" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
                     <TextBox x:Name="textBoxCURP" materialDesign:HintAssist.Hint="CURP" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
                     

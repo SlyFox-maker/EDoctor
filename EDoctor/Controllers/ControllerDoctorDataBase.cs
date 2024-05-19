@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace EDoctor.Controllers
 {
@@ -18,9 +19,9 @@ namespace EDoctor.Controllers
         }
 
 
-        public String createNewUser(String fullName, String CURP, String phone, String email, String password)
+        public bool createNewUser(String fullName, String CURP, String phone, String email, String password)
         {
-            String status = "";
+            bool status = false;
 
 
             //creating of user for UserDb
@@ -59,11 +60,7 @@ namespace EDoctor.Controllers
                             // Проверяем успешность операции
                             if (drRowsAffected > 0)
                             {
-                                status = "Пользователь успешно создан.";
-                            }
-                            else
-                            {
-                                status = "Не удалось создать пользователя.";
+                                status = true;
                             }
                         }
                         conn.Close();
@@ -78,6 +75,61 @@ namespace EDoctor.Controllers
             }
 
                 
+
+            return status;
+        }
+
+        public bool login(String login, String password)
+        {
+            bool status = false;
+
+            password = getHash(password);
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    Debug.WriteLine("Соединение установлено успешно.");
+
+                    //Если все окей, то пробуем добавлять новые данные
+                    string sqlQueryForUserTable = "SELECT COUNT(*) FROM dbo.[User] WHERE Login = @Login AND Password = @Password";
+
+                    using (SqlCommand command = new SqlCommand(sqlQueryForUserTable, conn))
+                    {
+                        command.Parameters.AddWithValue("@Login", login);
+                        command.Parameters.AddWithValue("@Password", password);
+
+                        try
+                        {
+                            int drRowsAffected = (int)command.ExecuteScalar();
+
+                            // Проверяем успешность операции
+                            if (drRowsAffected > 0)
+                            {
+                                status = true;
+                            }
+
+                            command.Dispose();
+
+                            conn.Close();
+                        }
+                        catch (Exception ex)
+                        {
+
+                            Debug.WriteLine("Ошибка при авторизации: " + ex.Message);
+                        }
+                    }
+
+                }
+                catch (Exception ex)
+                {
+
+                    Debug.WriteLine("Ошибка при подключении к базе данных: " + ex.Message);
+                }
+                conn.Close();
+            }
 
             return status;
         }
