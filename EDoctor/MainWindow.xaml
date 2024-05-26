@@ -16,11 +16,11 @@
         <BitmapImage x:Key="manPatientImage" UriSource="/EDoctor;component/Resources/manPatient.png"/>
         <BitmapImage x:Key="womanPatientImage" UriSource="/EDoctor;component/Resources/womanPatient.png"/>
     </Window.Resources>
-    <Grid Background="#034c81">
+    <Grid Background="#034c81" Margin="0,0,-102,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="166"></ColumnDefinition>
             <ColumnDefinition Width="0"></ColumnDefinition>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Viewbox Grid.Column="0" Stretch="Uniform" VerticalAlignment="Top" Height="486">
             <StackPanel VerticalAlignment="Top">
@@ -35,25 +35,26 @@
                     <Button Margin="0,5" Background="#FF4040" Content="Crear nueva nota"/>
                 </StackPanel>
 
-                <Button Margin="0,3,0,0" x:Name="tagButtonPacientes" Background="#5ba2f4" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagButtonPacientes_Click" Content="Pacientes"/>
-                <Button x:Name="tagButtonAgenda" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagButtonAgenda_Click" Content="Agenda"/>
-                <Button x:Name="tagButtonsNotas" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagButtonsNotas_Click" Content="Notas"/>
-                <Button x:Name="tagButtonsCitas" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagButtonsCitas_Click" Content="Citas"/>
-                <Button x:Name="tagButtons" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagButtonsCitas_Click" Content="Solicitud del laboratorio"/>
-                <Button x:Name="tagButtons1" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagButtonsCitas_Click" Content="Solicitud del RX"/>
-                <Button x:Name="tagButtonsMDA" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagButtonsCitas_Click" Content="MDA"/>
-                <Button x:Name="tagButtons2" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagButtonsCitas_Click" Content="Certificado medico"/>
-                <Button x:Name="tagButtons3" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagButtonsCitas_Click" Content="Formatos"/>
-                <Button x:Name="tagButtons4" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Click="tagButtonsCitas_Click" Content="Referencias"/>
-
+                <StackPanel x:Name="navigatorPanel">
+                    <Button x:Name="tagButtonPacientes" Margin="0,3,0,0" Background="#5ba2f4" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Pacientes"/>
+                    <Button x:Name="tagButtonAgenda" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Agenda"/>
+                    <Button x:Name="tagButtonsNotas" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Notas"/>
+                    <Button x:Name="tagButtonsCitas" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Citas"/>
+                    <Button x:Name="tagButtonsSolicitudDelLabarotorio" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Solicitud del laboratorio"/>
+                    <Button x:Name="tagButtonSolicitudDelRX" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Solicitud del RX"/>
+                    <Button x:Name="tagButtonsMDA" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="MDA"/>
+                    <Button x:Name="tagButtonsCertificadoMedico" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Certificado medico"/>
+                    <Button x:Name="tagButtonsFormatos" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Formatos"/>
+                    <Button x:Name="tagButtonsReferencias" Background="#0a6ab0" Style="{StaticResource MaterialDesignFlatLightBgButton}" Content="Referencias"/>
+                </StackPanel>
 
 
             </StackPanel>
         </Viewbox>
 
-        <Viewbox Grid.Column="2" Stretch="Uniform" VerticalAlignment="Top" Height="230">
+        <Viewbox Margin="3,0,0,0" Grid.Column="2" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left">
             <StackPanel x:Name="Stack1" Background="#5ba2f4">
-                <StackPanel x:Name="tabPacientes" Visibility="Visible" VerticalAlignment="Top">
+                <StackPanel x:Name="tabPacientes" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Grid Margin="0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -135,7 +136,7 @@
                     </Grid>
                 </StackPanel>
 
-                <StackPanel Background="#5ba2f4" x:Name="tabAgenda" Visibility="Collapsed">
+                <StackPanel Background="#5ba2f4" x:Name="tabAgenda" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" MinWidth="236" />
@@ -192,7 +193,7 @@
                     </Grid>
 
                 </StackPanel>
-                <StackPanel Background="#5ba2f4" x:Name="tabNotas" Visibility="Collapsed">
+                <StackPanel Background="#5ba2f4" x:Name="tabNotas" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed">
                     <Grid Margin="0,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -207,7 +208,7 @@
                     </Grid>
                     <TextBox Margin="5,0" materialDesign:HintAssist.Hint="Buscar notas" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
                 </StackPanel>
-                <StackPanel Background="#5ba2f4" x:Name="tabCitas" Visibility="Collapsed">
+                <StackPanel Background="#5ba2f4" x:Name="tabCitas" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" MinWidth="236" />

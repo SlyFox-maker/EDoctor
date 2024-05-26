@@ -29,6 +29,7 @@
                 <StackPanel x:Name="StackPanelEntrar" Visibility="Visible">
                     <TextBox x:Name="lLogin" materialDesign:HintAssist.Hint="Login" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
                     <PasswordBox x:Name="lPassword" materialDesign:HintAssist.Hint="Contraseña" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"></PasswordBox>
+
                     <Button Content="Entrar" Margin="0 20" Background="#ffff" Foreground="Black" Click="Button_Click"></Button>
                 </StackPanel>
 
