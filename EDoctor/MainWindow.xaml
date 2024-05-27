@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         xmlns:properties="clr-namespace:EDoctor.Properties"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="MainWindow" Height="600" Width="800">
+        Title="MainWindow" Height="600" Width="800"
+    xmlns:controlzEx="clr-namespace:ControlzEx;assembly=MaterialDesignThemes.Wpf"
+    xmlns:wpf="clr-namespace:MaterialDesignThemes.Wpf;assembly=MaterialDesignThemes.Wpf"
+    xmlns:converters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf">
 
     <Window.Resources>
         <!-- Ссылка на изображение из внутренних ресурсов -->
@@ -15,6 +18,7 @@
         <BitmapImage x:Key="allPatientImage" UriSource="/EDoctor;component/Resources/allPatients.png"/>
         <BitmapImage x:Key="manPatientImage" UriSource="/EDoctor;component/Resources/manPatient.png"/>
         <BitmapImage x:Key="womanPatientImage" UriSource="/EDoctor;component/Resources/womanPatient.png"/>
+
     </Window.Resources>
     <Grid Background="#034c81" Margin="0,0,-102,0">
         <Grid.ColumnDefinitions>
@@ -54,259 +58,291 @@
 
         <Viewbox Margin="3,0,0,0" Grid.Column="2" Stretch="Uniform" VerticalAlignment="Top" HorizontalAlignment="Left">
             <StackPanel x:Name="Stack1" Background="#5ba2f4">
-                <StackPanel x:Name="tabPacientes" Visibility="Visible" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Grid Margin="0,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                <StackPanel x:Name="panelsFromNavigationMenu" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <StackPanel x:Name="tabPacientes" Visibility="Collapsed">
+                        <Grid Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label FontWeight="Black" FontSize="15" Grid.Column="0" Margin="0,0,5,0">Catálogo de pacientes</Label>
-                        <Button Margin="300,2,116,2" Width="150" Background="#00CC00" Content="+ Nuevo paciente" Grid.Column="1"/>
-                        <Button Margin="73,0,271,0" Content="Control del pacientes por mes" Grid.Column="1"/>
+                            <Label FontWeight="Black" FontSize="15" Grid.Column="0" Margin="0,0,5,0">Catálogo de pacientes</Label>
+                            <Button x:Name="newPatientButton" Margin="300,2,116,2" Width="150" Background="#00CC00" Content="+ Nuevo paciente" Grid.Column="1" Click="newPatientButton_Click"/>
+                            <Button Margin="73,0,271,0" Content="Control del pacientes por mes" Grid.Column="1"/>
 
-                    </Grid>
-                    <TextBox Margin="5,0" materialDesign:HintAssist.Hint="Buscar pacientes" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                        </Grid>
+                        <TextBox Margin="5,0" materialDesign:HintAssist.Hint="Buscar pacientes" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
 
 
-                    <Grid Margin="0,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
+                        <Grid Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                        <StackPanel Grid.Column="0">
-                            <Label FontWeight="Black" FontSize="15" Margin="0,0,5,0">Pacientes</Label>
+                            <StackPanel Grid.Column="0">
+                                <Label FontWeight="Black" FontSize="15" Margin="0,0,5,0">Pacientes</Label>
 
-                            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
-                                <Image Source="{StaticResource allPatientImage}"  Width="32" Height="32" Margin="0,0,5,0" />
-                                <Label FontWeight="Black" FontSize="10" VerticalAlignment="Center">Total de pacientes</Label>
+                                <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                                    <Image Source="{StaticResource allPatientImage}"  Width="32" Height="32" Margin="0,0,5,0" />
+                                    <Label FontWeight="Black" FontSize="10" VerticalAlignment="Center">Total de pacientes</Label>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                                    <Image Source="{StaticResource womanPatientImage}"  Width="32" Height="32" Margin="0,0,5,0" />
+                                    <Label FontWeight="Black" FontSize="10" VerticalAlignment="Center">Femenino</Label>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
+                                    <Image Source="{StaticResource manPatientImage}"  Width="32" Height="32" Margin="0,0,5,0" />
+                                    <Label FontWeight="Black" FontSize="10" VerticalAlignment="Center">Masculino</Label>
+                                </StackPanel>
+
+
+
+
+
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
-                                <Image Source="{StaticResource womanPatientImage}"  Width="32" Height="32" Margin="0,0,5,0" />
-                                <Label FontWeight="Black" FontSize="10" VerticalAlignment="Center">Femenino</Label>
+                            <StackPanel Margin="0,30,0,0" Grid.Column="1" Orientation="Horizontal">
+                                <StackPanel Background="#5CCCCC" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Border Background="Gray" Width="4" Height="80"/>
+                                    <Image Source="{StaticResource allPatientImage}"  Width="32" Height="32" Margin="10,0,0,0" />
+                                    <StackPanel Margin="10,0">
+                                        <Label Margin="0,15,0,0" FontSize="20" VerticalAlignment="Center">0</Label>
+                                        <Label Margin="0,0,0,0" FontSize="10" VerticalAlignment="Center">Total de pacientes</Label>
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                                <StackPanel Margin="10,0" Background="#5CCCCC" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Border Background="#dd5790" Width="4" Height="80"/>
+                                    <Image Source="{StaticResource womanPatientImage}"  Width="32" Height="32" Margin="10,0,0,0" />
+                                    <StackPanel Margin="10,0">
+                                        <Label Margin="0,15,0,0" FontSize="20" VerticalAlignment="Center">0</Label>
+                                        <Label Margin="0,0,0,0" FontSize="10" VerticalAlignment="Center">Femenino</Label>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <StackPanel Margin="10,0" Background="#5CCCCC" Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Border Background="#698ed5" Width="4" Height="80"/>
+                                    <Image Source="{StaticResource manPatientImage}"  Width="32" Height="32" Margin="10,0,0,0" />
+                                    <StackPanel Margin="10,0">
+                                        <Label Margin="0,15,0,0" FontSize="20" VerticalAlignment="Center">0</Label>
+                                        <Label Margin="0,0,0,0" FontSize="10" VerticalAlignment="Center">Masculino</Label>
+                                    </StackPanel>
+                                </StackPanel>
+
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="10,10,0,0">
-                                <Image Source="{StaticResource manPatientImage}"  Width="32" Height="32" Margin="0,0,5,0" />
-                                <Label FontWeight="Black" FontSize="10" VerticalAlignment="Center">Masculino</Label>
+
+
+
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel x:Name="tabAgenda" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="236" />
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <Calendar Height="435"></Calendar>
                             </StackPanel>
 
 
+                            <StackPanel Grid.Column="1">
+                                <StackPanel Background="#5CCCCC" Orientation="Horizontal" Width="387" >
+                                    <Rectangle Margin="5,5" Width="50" Height="50" Stroke="Black">
+                                        <!-- Фоновое изображение -->
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource AvatarImage}"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
+                                    <Label VerticalAlignment="Center">Nombre Apellido Nombre Apellido</Label>
+
+                                    <Button Margin="20,0,0,0" Background="#00CC00" Content="+ Nueva cita" Grid.Column="1"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
+                                        <Label HorizontalAlignment="Center" FontSize="20">1</Label>
+                                        <Label HorizontalAlignment="Center" FontSize="10">08:00</Label>
+                                    </StackPanel>
+
+                                    <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
+                                </StackPanel>
+
+                                <StackPanel Background="#0a6ab0" Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
+                                        <Label HorizontalAlignment="Center" FontSize="20">2</Label>
+                                        <Label HorizontalAlignment="Center" FontSize="10">08:30</Label>
+                                    </StackPanel>
+
+                                    <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
+                                        <Label HorizontalAlignment="Center" FontSize="20">3</Label>
+                                        <Label HorizontalAlignment="Center" FontSize="10">09:00</Label>
+                                    </StackPanel>
+
+                                    <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Grid>
+
+                    </StackPanel>
+                    <StackPanel x:Name="tabNotas" Visibility="Collapsed">
+                        <Grid Margin="0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label FontWeight="Black" FontSize="15" Grid.Column="0" Margin="0,0,5,0">Notas</Label>
+
+                            <Button Width="100" Margin="300,0,10,0" Background="#00CC00" Content="Reporte"/>
+
+                            <Button Width="110" Margin="510,0,0,0" Background="#FF4040" Content="Nota rápida" />
+                        </Grid>
+                        <TextBox Margin="5,0" materialDesign:HintAssist.Hint="Buscar notas" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
+                    </StackPanel>
+                    <StackPanel x:Name="tabCitas" Visibility="Collapsed">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" MinWidth="236" />
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <Calendar Height="435"></Calendar>
+                            </StackPanel>
 
 
+                            <StackPanel Grid.Column="1">
+                                <StackPanel Background="#5CCCCC" Orientation="Horizontal" Width="387" >
+                                    <Rectangle Margin="5,5" Width="50" Height="50" Stroke="Black">
+                                        <!-- Фоновое изображение -->
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource AvatarImage}"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
 
+                                    <Label VerticalAlignment="Center">Nombre Apellido Nombre Apellido</Label>
+
+                                    <Button Margin="20,0,0,0" Background="#00CC00" Content="+ Nueva cita" Grid.Column="1"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
+                                        <Label HorizontalAlignment="Center" FontSize="20">1</Label>
+                                        <Label HorizontalAlignment="Center" FontSize="10">08:00</Label>
+                                    </StackPanel>
+
+                                    <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
+                                </StackPanel>
+
+                                <StackPanel Background="#0a6ab0" Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
+                                        <Label HorizontalAlignment="Center" FontSize="20">2</Label>
+                                        <Label HorizontalAlignment="Center" FontSize="10">08:30</Label>
+                                    </StackPanel>
+
+                                    <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel Orientation="Vertical">
+                                        <Label HorizontalAlignment="Center" FontSize="20">3</Label>
+                                        <Label HorizontalAlignment="Center" FontSize="10">09:00</Label>
+                                    </StackPanel>
+
+                                    <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel x:Name="subPanels" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <StackPanel Background="#5ba2f4" x:Name="tabRegistrationOfNewPatient" Visibility="Visible">
+                        <Border BorderBrush="Black" BorderThickness="0.3" CornerRadius="5" Padding="10" Margin="10">
+                            <StackPanel>
+                                <Label FontWeight="Bold" HorizontalAlignment="Center">Datos del paciente</Label>
+                                <StackPanel Margin="0,20" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <TextBox Margin="10,0" Width="100">Nombre completo</TextBox>
+                                    <TextBox Margin="10,0" Width="100">Apellido paterno</TextBox>
+                                    <TextBox Margin="10,0" Width="100">Apellido materno</TextBox>
+                                </StackPanel>
+                                <StackPanel Margin="0,10" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <StackPanel Margin="10,0" HorizontalAlignment="Center">
+                                        <Label>Fecha de nacimiento</Label>
+                                        <DatePicker Background="#5495e1" x:Name="FechaDeNacimientoNewPatientDatePicker" Width="100" Height="50" SelectedDateChanged="FechaDeNacimientoNewPatientDatePicker_SelectedDateChanged" Style="{DynamicResource MaterialDesignFloatingHintDatePicker}"/>
+                                    </StackPanel>
+                                    <StackPanel Margin="10,0" HorizontalAlignment="Center">
+                                        <Label>Sexo</Label>
+                                        <ComboBox Background="#5495e1" Height="50" Width="100" Style="{DynamicResource MaterialDesignFilledComboBox}">
+                                            <ComboBoxItem Content="Eligir" IsSelected="True"/>
+                                            <ComboBoxItem Content="Hombre"/>
+                                            <ComboBoxItem Content="Mujer" />
+                                        </ComboBox>
+                                    </StackPanel>
+
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <Border BorderBrush="Black" BorderThickness="0.3" CornerRadius="5" Padding="10" Margin="10">
+                            <StackPanel>
+                                <Label FontWeight="Bold" HorizontalAlignment="Center">Datos de contacto</Label>
+                                <StackPanel Margin="0,20" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <TextBox Margin="10,0" Width="100">Número de telefono</TextBox>
+                                    <TextBox Margin="10,0" Width="100">Correo electronico</TextBox>
+                                </StackPanel>
+                                <StackPanel Margin="0,10" HorizontalAlignment="Center" Orientation="Horizontal">
+                                    <TextBox Margin="10,0" Width="100">Ciudad</TextBox>
+                                    <TextBox Margin="10,0" Width="100">Dirección</TextBox>
+                                    <TextBox Margin="10,0" Width="100">Codigo postal</TextBox>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        
+                        <Label Margin="0,10,0,0" FontWeight="Bold" HorizontalAlignment="Center">Información automática</Label>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Label x:Name="EdadNewPatientLabel" Margin="10,0" HorizontalAlignment="Center">Edad:</Label>
+                            <Label x:Name="FechaDeEngresoNewPatientLabel" Margin="10,0" HorizontalAlignment="Center">Fecha de engreso:</Label>
                         </StackPanel>
 
-                        <StackPanel Margin="0,30,0,0" Grid.Column="1" Orientation="Horizontal">
-                            <StackPanel Background="#5CCCCC" Orientation="Horizontal" VerticalAlignment="Center">
-                                <Border Background="Gray" Width="4" Height="80"/>
-                                <Image Source="{StaticResource allPatientImage}"  Width="32" Height="32" Margin="10,0,0,0" />
-                                <StackPanel Margin="10,0">
-                                    <Label Margin="0,15,0,0" FontSize="20" VerticalAlignment="Center">0</Label>
-                                    <Label Margin="0,0,0,0" FontSize="10" VerticalAlignment="Center">Total de pacientes</Label>
-                                </StackPanel>
+                        <Button Margin="30,10" Background="#00CC00" Width="100">Agregar</Button>
+                    </StackPanel>
 
-                            </StackPanel>
+                    <StackPanel Background="#5ba2f4" x:Name="windowOfPatient" Visibility="Collapsed">
 
-                            <StackPanel Margin="10,0" Background="#5CCCCC" Orientation="Horizontal" VerticalAlignment="Center">
-                                <Border Background="#dd5790" Width="4" Height="80"/>
-                                <Image Source="{StaticResource womanPatientImage}"  Width="32" Height="32" Margin="10,0,0,0" />
-                                <StackPanel Margin="10,0">
-                                    <Label Margin="0,15,0,0" FontSize="20" VerticalAlignment="Center">0</Label>
-                                    <Label Margin="0,0,0,0" FontSize="10" VerticalAlignment="Center">Femenino</Label>
-                                </StackPanel>
-                            </StackPanel>
+                        <Label>Jose Jpse Lala lala</Label>
+                        <Label>Edad</Label>
 
-                            <StackPanel Margin="10,0" Background="#5CCCCC" Orientation="Horizontal" VerticalAlignment="Center">
-                                <Border Background="#698ed5" Width="4" Height="80"/>
-                                <Image Source="{StaticResource manPatientImage}"  Width="32" Height="32" Margin="10,0,0,0" />
-                                <StackPanel Margin="10,0">
-                                    <Label Margin="0,15,0,0" FontSize="20" VerticalAlignment="Center">0</Label>
-                                    <Label Margin="0,0,0,0" FontSize="10" VerticalAlignment="Center">Masculino</Label>
-                                </StackPanel>
-                            </StackPanel>
+                        <Label>Peso: 13124</Label>
+                        <Label>Talla:</Label>
+                        <Label>IMS:</Label>
+                        <Label>Temperatura:</Label>
+                        <Label>Frecuencia cardiaca:</Label>
+                        <Label>Frecuencia respiratoria:</Label>
+                        <Label>Precion arterial</Label>
+                        <Label>Saturación del oxigeno</Label>
+                        <Label>Numero del expediente</Label>
 
-                        </StackPanel>
+                        <Button>Crear nuevo expediente</Button>
 
-
-
-
-                    </Grid>
+                    </StackPanel>
                 </StackPanel>
 
-                <StackPanel Background="#5ba2f4" x:Name="tabAgenda" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" MinWidth="236" />
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Column="0">
-                            <Calendar Height="435"></Calendar>
-                        </StackPanel>
-
-
-                        <StackPanel Grid.Column="1">
-                            <StackPanel Background="#5CCCCC" Orientation="Horizontal" Width="387" >
-                                <Rectangle Margin="5,5" Width="50" Height="50" Stroke="Black">
-                                    <!-- Фоновое изображение -->
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource AvatarImage}"/>
-                                    </Rectangle.Fill>
-                                </Rectangle>
-
-                                <Label VerticalAlignment="Center">Nombre Apellido Nombre Apellido</Label>
-
-                                <Button Margin="20,0,0,0" Background="#00CC00" Content="+ Nueva cita" Grid.Column="1"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <Label HorizontalAlignment="Center" FontSize="20">1</Label>
-                                    <Label HorizontalAlignment="Center" FontSize="10">08:00</Label>
-                                </StackPanel>
-
-                                <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Background="#0a6ab0" Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <Label HorizontalAlignment="Center" FontSize="20">2</Label>
-                                    <Label HorizontalAlignment="Center" FontSize="10">08:30</Label>
-                                </StackPanel>
-
-                                <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <Label HorizontalAlignment="Center" FontSize="20">3</Label>
-                                    <Label HorizontalAlignment="Center" FontSize="10">09:00</Label>
-                                </StackPanel>
-
-                                <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                        </StackPanel>
-                    </Grid>
-
-                </StackPanel>
-                <StackPanel Background="#5ba2f4" x:Name="tabNotas" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed">
-                    <Grid Margin="0,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Label FontWeight="Black" FontSize="15" Grid.Column="0" Margin="0,0,5,0">Notas</Label>
-
-                        <Button Width="100" Margin="300,0,10,0" Background="#00CC00" Content="Reporte"/>
-
-                        <Button Width="110" Margin="510,0,0,0" Background="#FF4040" Content="Nota rápida" />
-                    </Grid>
-                    <TextBox Margin="5,0" materialDesign:HintAssist.Hint="Buscar notas" Style="{StaticResource MaterialDesignFloatingHintTextBox}"></TextBox>
-                </StackPanel>
-                <StackPanel Background="#5ba2f4" x:Name="tabCitas" HorizontalAlignment="Left" VerticalAlignment="Top" Visibility="Collapsed">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" MinWidth="236" />
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel Grid.Column="0">
-                            <Calendar Height="435"></Calendar>
-                        </StackPanel>
-
-
-                        <StackPanel Grid.Column="1">
-                            <StackPanel Background="#5CCCCC" Orientation="Horizontal" Width="387" >
-                                <Rectangle Margin="5,5" Width="50" Height="50" Stroke="Black">
-                                    <!-- Фоновое изображение -->
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource AvatarImage}"/>
-                                    </Rectangle.Fill>
-                                </Rectangle>
-
-                                <Label VerticalAlignment="Center">Nombre Apellido Nombre Apellido</Label>
-
-                                <Button Margin="20,0,0,0" Background="#00CC00" Content="+ Nueva cita" Grid.Column="1"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <Label HorizontalAlignment="Center" FontSize="20">1</Label>
-                                    <Label HorizontalAlignment="Center" FontSize="10">08:00</Label>
-                                </StackPanel>
-
-                                <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Background="#0a6ab0" Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <Label HorizontalAlignment="Center" FontSize="20">2</Label>
-                                    <Label HorizontalAlignment="Center" FontSize="10">08:30</Label>
-                                </StackPanel>
-
-                                <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
-                                <StackPanel Orientation="Vertical">
-                                    <Label HorizontalAlignment="Center" FontSize="20">3</Label>
-                                    <Label HorizontalAlignment="Center" FontSize="10">09:00</Label>
-                                </StackPanel>
-
-                                <Button Margin="260,0,0,0" Content="Agendar" HorizontalAlignment="Right"/>
-                            </StackPanel>
-
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-
-                <StackPanel Background="#5ba2f4" x:Name="tabCit1as" Visibility="Collapsed">
-                    <TextBox Width="100">Nombre completo</TextBox>
-                    <TextBox Width="100">Apellido paterno</TextBox>
-                    <TextBox Width="100">Apellido materno</TextBox>
-
-                    <TextBox Width="100">Fecha de nacimiento</TextBox>
-                    <TextBox Width="100">Sexo</TextBox>
-
-                    <TextBox Width="100">Dirección</TextBox>
-                    <TextBox Width="100">Número de telefono</TextBox>
-                    <TextBox Width="100">Ciudad</TextBox>
-                    <TextBox Width="100">Codigo postal</TextBox>
-                    <TextBox Width="100">Correo electronico</TextBox>
-
-
-
-                    <Label Margin="0,50" HorizontalAlignment="Center">Cosas automaticos:</Label>
-
-                    <Label HorizontalAlignment="Center">Edad:</Label>
-                    <Label HorizontalAlignment="Center">Fecha de engreso:</Label>
-
-                    <Button Width="300">Agregar</Button>
-                </StackPanel>
-
-                <StackPanel Background="#5ba2f4" x:Name="windowOfPatient" Visibility="Collapsed">
-
-                    <Label>Jose Jpse Lala lala</Label>
-                    <Label>Edad</Label>
-
-                    <Label>Peso: 13124</Label>
-                    <Label>Talla:</Label>
-                    <Label>IMS:</Label>
-                    <Label>Temperatura:</Label>
-                    <Label>Frecuencia cardiaca:</Label>
-                    <Label>Frecuencia respiratoria:</Label>
-                    <Label>Precion arterial</Label>
-                    <Label>Saturación del oxigeno</Label>
-                    <Label>Numero del expediente</Label>
-
-                    <Button>Crear nuevo expediente</Button>
-
-                </StackPanel>
             </StackPanel>
 
 

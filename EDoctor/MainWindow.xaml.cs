@@ -75,13 +75,50 @@ namespace EDoctor
             tagButtonsNotas.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0a6ab0"));
             tagButtonsCitas.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0a6ab0"));
 
+
+            //Main Panels
             tabPacientes.Visibility = Visibility.Collapsed;
             tabAgenda.Visibility = Visibility.Collapsed;
             tabNotas.Visibility = Visibility.Collapsed;
             tabCitas.Visibility = Visibility.Collapsed;
 
 
+            //SubPanels
+            tabRegistrationOfNewPatient.Visibility = Visibility.Collapsed;
 
+
+        }
+
+        private void newPatientButton_Click(object sender, RoutedEventArgs e)
+        {
+            clearTagNavigation();
+            
+            tabRegistrationOfNewPatient.Visibility = Visibility.Visible;
+
+            String dateNow = DateTime.Now.ToString();
+            FechaDeEngresoNewPatientLabel.Content= "Fecha de engreso: " + dateNow;
+        }
+
+        private void FechaDeNacimientoNewPatientDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DatePicker datePicker = sender as DatePicker;
+            if (datePicker != null && datePicker.SelectedDate.HasValue)
+            {
+                DateTime selectedDate = datePicker.SelectedDate.Value;
+
+                int age = CalculateAge(selectedDate);
+                // Здесь можно использовать выбранную дату, например:
+
+                EdadNewPatientLabel.Content = "Edad: " + age.ToString();
+            }
+        }
+
+        private static int CalculateAge(DateTime birthDate)
+        {
+            DateTime today = DateTime.Today;
+            int age = today.Year - birthDate.Year;
+            if (birthDate.Date > today.AddYears(-age)) age--;
+            return age;
         }
     }
 }
