@@ -13,9 +13,15 @@ namespace EDoctor.Controllers
 {
     class ControllerDoctorDataBase
     {
-        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\SlyFox\source\repos\EDoctor\EDoctor\bd\Doctor.mdf;Integrated Security=True";
+        private string connectionString = "";
 
         public ControllerDoctorDataBase() {
+
+            string relativePath = @"..\..\..\bd\Doctor.mdf";
+            string absolutePath = System.IO.Path.GetFullPath(relativePath);
+
+            connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + absolutePath + ";Integrated Security=True";
+
         }
 
 
